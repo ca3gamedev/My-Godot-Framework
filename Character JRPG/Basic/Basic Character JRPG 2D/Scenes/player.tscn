@@ -1,0 +1,263 @@
+[gd_scene load_steps=29 format=3 uid="uid://b5er4qbeyqh0j"]
+
+[ext_resource type="Texture2D" uid="uid://5amc80pdymcb" path="res://Basic Character JRPG 2D/2D/hero.png" id="1_a1io6"]
+[ext_resource type="Script" path="res://Basic Character JRPG 2D/Code/player.gd" id="1_l2y32"]
+[ext_resource type="Script" path="res://Basic Character JRPG 2D/Code/FSM.gd" id="2_tdplr"]
+[ext_resource type="Script" path="res://Basic Character JRPG 2D/Code/INPUT.gd" id="3_jf7q2"]
+[ext_resource type="Script" path="res://Basic Character JRPG 2D/Code/IDLE.gd" id="4_u5vi7"]
+[ext_resource type="Script" path="res://Basic Character JRPG 2D/Code/WALK.gd" id="6_7cfbc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7l1dg"]
+radius = 8.0
+height = 24.0
+
+[sub_resource type="Animation" id="Animation_80e0d"]
+resource_name = "IDLE F"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_fjjyw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_00dn0"]
+resource_name = "IDLE R"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+
+[sub_resource type="Animation" id="Animation_xa1lp"]
+resource_name = "IDLE L"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_5hixw"]
+resource_name = "IDLE B"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
+}
+
+[sub_resource type="Animation" id="Animation_fecye"]
+resource_name = "WALK F"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_tx15d"]
+resource_name = "WALK B"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15]
+}
+
+[sub_resource type="Animation" id="Animation_g5h0x"]
+resource_name = "WALK L"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_0tt07"]
+resource_name = "WALK R"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wkwe1"]
+_data = {
+"IDLE B": SubResource("Animation_5hixw"),
+"IDLE F": SubResource("Animation_80e0d"),
+"IDLE L": SubResource("Animation_xa1lp"),
+"IDLE R": SubResource("Animation_00dn0"),
+"RESET": SubResource("Animation_fjjyw"),
+"WALK B": SubResource("Animation_tx15d"),
+"WALK F": SubResource("Animation_fecye"),
+"WALK L": SubResource("Animation_g5h0x"),
+"WALK R": SubResource("Animation_0tt07")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y07gd"]
+animation = &"IDLE F"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4khko"]
+animation = &"IDLE B"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0inyp"]
+animation = &"IDLE R"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c16dl"]
+animation = &"IDLE L"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fomet"]
+animation = &"WALK F"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_im8fj"]
+animation = &"WALK B"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ny2yg"]
+animation = &"WALK R"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b7qf2"]
+animation = &"WALK L"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_w0ti2"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_y07gd")
+blend_point_0/pos = Vector2(0, 0.5)
+blend_point_1/node = SubResource("AnimationNodeAnimation_4khko")
+blend_point_1/pos = Vector2(0, -0.5)
+blend_point_2/node = SubResource("AnimationNodeAnimation_0inyp")
+blend_point_2/pos = Vector2(0.5, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_c16dl")
+blend_point_3/pos = Vector2(-0.5, 0)
+blend_point_4/node = SubResource("AnimationNodeAnimation_fomet")
+blend_point_4/pos = Vector2(0, 1)
+blend_point_5/node = SubResource("AnimationNodeAnimation_im8fj")
+blend_point_5/pos = Vector2(0, -1)
+blend_point_6/node = SubResource("AnimationNodeAnimation_ny2yg")
+blend_point_6/pos = Vector2(1, 0)
+blend_point_7/node = SubResource("AnimationNodeAnimation_b7qf2")
+blend_point_7/pos = Vector2(-1, 0)
+snap = Vector2(0.5, 0.5)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_itv70"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_76x8y"]
+states/MOVE/node = SubResource("AnimationNodeBlendSpace2D_w0ti2")
+states/MOVE/position = Vector2(376, 99.7778)
+transitions = ["Start", "MOVE", SubResource("AnimationNodeStateMachineTransition_itv70")]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_l2y32")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -22)
+texture = ExtResource("1_a1io6")
+hframes = 4
+vframes = 4
+region_rect = Rect2(0, -0.381481, 32, 48.3815)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -8)
+shape = SubResource("CapsuleShape2D_7l1dg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wkwe1")
+}
+
+[node name="Anim" type="AnimationTree" parent="."]
+unique_name_in_owner = true
+active = false
+root_node = NodePath("%Anim/..")
+libraries = {
+"": SubResource("AnimationLibrary_wkwe1")
+}
+tree_root = SubResource("AnimationNodeStateMachine_76x8y")
+anim_player = NodePath("../AnimationPlayer")
+parameters/MOVE/blend_position = Vector2(0.00464034, 0.928)
+
+[node name="FSM" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_tdplr")
+
+[node name="INPUT" type="Node" parent="FSM"]
+script = ExtResource("3_jf7q2")
+
+[node name="IDLE" type="Node" parent="FSM"]
+script = ExtResource("4_u5vi7")
+
+[node name="WALK" type="Node" parent="FSM"]
+script = ExtResource("6_7cfbc")

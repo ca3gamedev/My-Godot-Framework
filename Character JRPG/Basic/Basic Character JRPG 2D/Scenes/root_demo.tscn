@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwxj84ds0u6fp"]
+
+[ext_resource type="PackedScene" uid="uid://b5er4qbeyqh0j" path="res://Basic Character JRPG 2D/Scenes/player.tscn" id="1_cccrs"]
+
+[node name="Root Demo" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_cccrs")]
+position = Vector2(379, 286)
+walkspeed = 50.0
